@@ -1,0 +1,12 @@
+# Other files/directories
+.env
+.dockerignore
+Dockerfile
+node_modules
+unused
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
