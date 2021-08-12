@@ -4,6 +4,7 @@
 Dockerfile
 node_modules
 unused
+*.zip
 
 # IntelliJ project files
 .idea
