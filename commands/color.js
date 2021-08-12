@@ -15,19 +15,19 @@ module.exports = class Color extends Command {
             description: 'You have successfully changed your name color.'
         }
 
-        if (!args || args.length < 1) {
+        if (!args || args.length < 1 || TypeError) {
             const helpEmbed = {
                 color: this.client.colors.red,
                 title: 'Incorrect Usage',
-                description: `**@The Editor color <color>**\nPlease reference the link below to use regular colors or enter in a HTML Hexadecimal code to set your color.\nhttps://gist.github.com/thomasbnt/b6f455e2c7d743b796917fa3c205f812#file-code_colors_discordjs-md`
+                description: `**@The Editor color <color>**\nPlease reference the link below to use regular colors or enter an HTML Hexadecimal code to set your color.\nhttps://gist.github.com/thomasbnt/b6f455e2c7d743b796917fa3c205f812#file-code_colors_discordjs-md`
             }
 
-            return msg.channel.send({embed: helpEmbed});
+            return msg.channel.send({embeds: [helpEmbed]});
         }
 
         if (userRole) {
             userRole.setColor(args[0]).then(() => {
-                msg.channel.send({embed: embed});
+                msg.channel.send({embeds: [embed]});
             }).catch(err => {
                 this.client.logger.error(err);
             });
@@ -41,7 +41,7 @@ module.exports = class Color extends Command {
                 reason: `Created for ${msg.author.tag}`
             }).then(newRole => {
                 msg.member.roles.add(newRole).then( () => {
-                    msg.channel.send({embed: embed});
+                    msg.channel.send({embeds: [embed]});
                 });
             }).catch(err => {
                 this.client.logger.error(err)
