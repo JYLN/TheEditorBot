@@ -1,13 +1,11 @@
-const { Client, Collection } = require('discord.js');
+const { Client, Collection, Intents} = require('discord.js');
 const { settings, colors } = require('../utils/config')
 const { readdirSync } = require('fs');
 require('dotenv').config();
 
 module.exports = class EditorBot extends Client {
-    constructor(options) {
-        super(options, {
-            ws: {intents: ['GUILD_MEMBERS']}
-        });
+    constructor() {
+        super({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
         this.logger = require('../utils/Logger');
         this.settings = settings;
         this.colors = colors;
