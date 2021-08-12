@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.0",
-    "discord.js": "^12.5.3",
+    "discord.js": "^13.1.0",
     "dotenv": "^8.2.0",
     "moment": "^2.29.1",
     "slash-create": "^3.0.1"
