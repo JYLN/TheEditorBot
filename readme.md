@@ -10,3 +10,6 @@ This is a small Discord bot created for a specific server.
 ### Commands
 > **Ping** - *Added* - Test command that members can run to ensure the bot is online; responds with the WebSocket latency\
 > **Color** - *Added* - Command that members can run to change the color of their name; bot creates a role named after the user that runs the command and then updates the color to the argument given to the bot. Bot ensures this is the member's highest role so that the color that is chosen by be seen
+
+## Changelog: v1.1
+> Migrated from previous Discord.JS version to Discord.JS v13
