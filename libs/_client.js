@@ -46,7 +46,6 @@ module.exports = class EditorBot extends Client {
     }
 
     loadSlashCommands() {
-        console.log(this.slashCommands);
         const rest = new REST({version: '9'}).setToken(process.env.TOKEN);
         (async () => {
             try {
