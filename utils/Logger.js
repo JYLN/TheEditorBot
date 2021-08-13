@@ -12,7 +12,7 @@ class Logger {
                 return console.log(`${timestamp}${Chalk.black.bgYellow(`[${type.toUpperCase()}]`)} ${content}`);
             }
             case 'error': {
-                return console.log(`${timestamp}${Chalk.red(`[${type.toUpperCase()}]`)} ${content}`);
+                return console.log(`${timestamp}${Chalk.red(`[${type.toUpperCase()}]`)} ${content.stack}`);
             }
             case 'debug': {
                 return console.log(`${timestamp}${Chalk.black.bgGreen(`[${type.toUpperCase()}]`)} ${content}`);
