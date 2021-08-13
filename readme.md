@@ -13,3 +13,6 @@ This is a small Discord bot created for a specific server.
 
 ## Changelog: v1.1
 > Migrated from previous Discord.JS version to Discord.JS v13
+
+## Changelog: v2.0
+> Client and commands were updated to support slash command feature as Discord.JS v13 supports this feature. Regular commands using the mention prefix will likely be deprecated in future versions.
