@@ -43,11 +43,9 @@ module.exports = class Color extends SlashCommand {
                     });
                 } else {
                     interaction.guild.roles.create({
-                        data: {
-                            name: interaction.member.user.username,
-                            color: getColor,
-                            position: (interaction.member.roles.highest.position + 1)
-                        },
+                        name: interaction.member.user.username,
+                        color: getColor,
+                        position: (interaction.member.roles.highest.position + 1),
                         reason: `Created for ${interaction.member.user.tag}`
                     }).then(newRole => {
                         interaction.member.roles.add(newRole).then(() => {
