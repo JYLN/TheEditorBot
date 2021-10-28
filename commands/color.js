@@ -15,7 +15,7 @@ module.exports = class Color extends Command {
             description: 'You have successfully changed your name color.'
         }
 
-        if (!args || args.length < 1 || TypeError) {
+        const errorEmbed = () => {
             const helpEmbed = {
                 color: this.client.colors.red,
                 title: 'Incorrect Usage',
@@ -25,26 +25,32 @@ module.exports = class Color extends Command {
             return msg.channel.send({embeds: [helpEmbed]});
         }
 
+        if (!args || args.length < 1) {
+            errorEmbed();
+        }
+
+        const getColor = args[0].toUpperCase();
+
         if (userRole) {
-            userRole.setColor(args[0]).then(() => {
+            userRole.setColor(getColor).then(() => {
                 msg.channel.send({embeds: [embed]});
             }).catch(err => {
                 this.client.logger.error(err);
+                errorEmbed();
             });
         } else {
             msg.guild.roles.create({
-                data: {
-                    name: msg.author.username,
-                    color: args[0],
-                    position: (msg.member.roles.highest.position + 1),
-                },
+                name: msg.author.username,
+                color: getColor,
+                position: (msg.member.roles.highest.position + 1),
                 reason: `Created for ${msg.author.tag}`
             }).then(newRole => {
                 msg.member.roles.add(newRole).then( () => {
                     msg.channel.send({embeds: [embed]});
                 });
             }).catch(err => {
-                this.client.logger.error(err)
+                this.client.logger.error(err);
+                errorEmbed();
             });
         }
     }
