@@ -4,6 +4,6 @@ module.exports = class Ready {
     }
 
     run() {
-        this.client.logger.log(`${this.client.user.tag} is ready!`, 'ready');
+        this.client.logger.ready(`${this.client.user.tag} is ready!`);
     }
 }
