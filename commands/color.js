@@ -12,7 +12,8 @@ module.exports = class Color extends SlashCommand {
                         .setDescription('Enter a color string or a HTML hexadecimal code')
                         .setRequired(true)),
             async execute(interaction) {
-                const userRole = interaction.guild.roles.cache.find(role => role.name === interaction.member.user.username);
+                const userId = interaction.member.id.substring(0,5);
+                const userRole = interaction.guild.roles.cache.find(role => role.name.includes(userId));
                 const embed = {
                     color: this.client.colors.green,
                     description: 'You have successfully changed your name color'
@@ -35,15 +36,15 @@ module.exports = class Color extends SlashCommand {
                 const getColor = interaction.options.getString('color').toUpperCase();
 
                 if (userRole) {
-                    userRole.setColor(getColor).then(() => {
+                    await userRole.setColor(getColor).then(() => {
                         interaction.reply({embeds: [embed]})
                     }).catch(err => {
                         this.client.logger.error(err);
                         errorEmbed();
                     });
                 } else {
-                    interaction.guild.roles.create({
-                        name: interaction.member.user.username,
+                    await interaction.guild.roles.create({
+                        name: `Custom Color ${userId}`,
                         color: getColor,
                         position: (interaction.member.roles.highest.position + 1),
                         reason: `Created for ${interaction.member.user.tag}`
