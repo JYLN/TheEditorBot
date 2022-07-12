@@ -8,6 +8,7 @@ module.exports = class InteractionCreate {
 
         try {
             await this.client.commands.get(interaction.commandName).execute(interaction);
+            this.client.logger.cmd(`${interaction.member.user.username} ran ${interaction.commandName}`);
         } catch (error) {
             this.client.logger.error(error);
             await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
