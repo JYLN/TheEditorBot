@@ -6,7 +6,7 @@ module.exports = class Ping extends SlashCommand {
         super(client, {
             data: new SlashCommandBuilder()
                 .setName('ping')
-                .setDescription('Simple command to ensure bot is responding; pings the Discord API and returns the latency of API response'),
+                .setDescription('Simple command to ensure bot is responding; returns the latency of API response'),
             async execute(interaction) {
                 const pongEmbed = {
                     color: this.client.colors.green,
