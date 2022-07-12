@@ -27,7 +27,7 @@ module.exports = class EditorBot extends Client {
     commandHandler() {
         const commandFiles = readdirSync('./commands').filter(file => file.endsWith('.js'));
         commandFiles.forEach(cmd => {
-            const command = new (require(`../slashCommands/${cmd}`))(this);
+            const command = new (require(`../commands/${cmd}`))(this);
             this.commands.set(command.data.name, command);
         });
     }
