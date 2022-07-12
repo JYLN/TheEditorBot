@@ -4,6 +4,17 @@ module.exports = class InteractionCreate {
     }
 
     async run(interaction) {
+        if (interaction.isAutocomplete()) {
+            if (interaction.commandName === 'color') {
+                const focused = interaction.options.getFocused();
+                const choices = this.client.roleColorStrings;
+                const filtered = choices.filter(choice => choice.startsWith(focused));
+                await interaction.respond(
+                    filtered.map(choice => ({name: choice, value: choice}))
+                )
+            }
+        }
+
         if (!interaction.isCommand() || !this.client.commands.has(interaction.commandName)) return;
 
         try {
