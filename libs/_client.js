@@ -1,18 +1,16 @@
-const { Client, Collection, Intents} = require('discord.js');
+const { Client, Collection, Intents } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { settings, colors } = require('../utils/config')
+const { colors } = require('../utils/config')
 const { readdirSync } = require('fs');
 require('dotenv').config();
 
 module.exports = class EditorBot extends Client {
     constructor() {
-        super({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MEMBERS] });
+        super({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS] });
         this.logger = require('../utils/Logger');
-        this.settings = settings;
         this.colors = colors;
         this.commands = new Collection();
-        this.slashCommands = new Collection();
     }
 
     eventHandler() {
@@ -27,25 +25,14 @@ module.exports = class EditorBot extends Client {
     }
 
     commandHandler() {
-        const commandFiles = readdirSync('./commands').filter(file => file.endsWith('js'));
+        const commandFiles = readdirSync('./commands').filter(file => file.endsWith('.js'));
         commandFiles.forEach(cmd => {
-            const cmdProps = new (require(`../commands/${cmd}`))(this);
-            if (cmdProps.name) {
-                this.logger.load(`Command: [${cmd}] is loaded!`);
-                this.commands.set(cmdProps.name, cmdProps);
-            }
-        });
-    }
-
-    slashCommandHandler() {
-        const slashCommandFiles = readdirSync('./slashCommands').filter(file => file.endsWith('.js'));
-        slashCommandFiles.forEach(cmd => {
             const command = new (require(`../slashCommands/${cmd}`))(this);
-            this.slashCommands.set(command.data.name, command);
+            this.commands.set(command.data.name, command);
         });
     }
 
-    loadSlashCommands() {
+    loadCommands() {
         const rest = new REST({version: '9'}).setToken(process.env.TOKEN);
         (async () => {
             try {
@@ -53,7 +40,7 @@ module.exports = class EditorBot extends Client {
 
                 await rest.put(
                     Routes.applicationGuildCommands('829220185503694849', '455482977883914290'),
-                    {body: this.slashCommands.map(command => command.data.toJSON())},
+                    {body: this.commands.map(command => command.data.toJSON())},
                 );
 
                 console.log('Successfully reloaded application commands.')
@@ -66,8 +53,7 @@ module.exports = class EditorBot extends Client {
     init() {
         this.eventHandler();
         this.commandHandler();
-        this.slashCommandHandler();
-        this.loadSlashCommands();
+        this.loadCommands();
 
         this.login(process.env.TOKEN);
     }
