@@ -1,7 +1,7 @@
 const { Client, Collection, Intents } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
-const { colors } = require('../utils/config')
+const { colors, roleColorStrings } = require('../utils/config')
 const { readdirSync } = require('fs');
 require('dotenv').config();
 
@@ -10,6 +10,7 @@ module.exports = class EditorBot extends Client {
         super({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS] });
         this.logger = require('../utils/Logger');
         this.colors = colors;
+        this.roleColorStrings = roleColorStrings;
         this.commands = new Collection();
     }
 
