@@ -10,7 +10,8 @@ module.exports = class Color extends SlashCommand {
                 .addStringOption(option =>
                     option.setName('color')
                         .setDescription('Enter a color string or a HTML hexadecimal code')
-                        .setRequired(true)),
+                        .setRequired(true)
+                        .setAutocomplete(true)),
             async execute(interaction) {
                 const userId = interaction.member.id.substring(0,5);
                 const userRole = interaction.guild.roles.cache.find(role => role.name.includes(userId));
