@@ -1,5 +1,5 @@
 # The Editor
-This is a small Discord bot created for a specific server.
+This is a small Discord bot created for a specific server. Currently, its only function is to allow members without administrator permissions to actively change the color of their username by creating a custom role with selected color.
 
 ## Changelog: v1.0
 ### Events
@@ -32,7 +32,7 @@ This is a small Discord bot created for a specific server.
 >     - Roles now rely on the first 5 digits of the member's user ID, prepended by string 'Custom Color'.
 >     - *This may be reverted to using Discord usernames depending on if I want to incorporate a database for the bot.*
 >   - Auto-complete has been enabled for the `color` argument to provide easy selection of recognized color strings if not inputting HTML hexadecimal color.
-> - ** Ping ** - *Updated*
+> - **Ping** - *Updated*
 >   - Updated description of the slash command to be more concise about its function.
 ### Other
 > - Re-factored console logging utility as previous version was reusing multiple lines of code, and was built as class but not utilizing class instances or constructor method.
